@@ -1,0 +1,39 @@
+
+
+plugins {
+    id 'java'
+    id'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+
+group 'com.mezkay'
+version '1.0-SNAPSHOT'
+def jdaVersion = "5.0.0-alpha.12"
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    maven { // on kotlin dsl use `maven("https://m2.dv8tion.net/releases")` instead
+        url "https://m2.dv8tion.net/releases"
+    }
+
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.mezkay.bot.Bot' ) }
+}
+
+
+dependencies {
+    implementation 'mysql:mysql-connector-java:8.0.29'
+    implementation 'org.json:json:20220320'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    implementation("net.dv8tion:JDA:$jdaVersion")
+}
+
+test {
+    useJUnitPlatform()
+}
